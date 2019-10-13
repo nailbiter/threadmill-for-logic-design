@@ -35,7 +35,7 @@ class Ex50 extends React.Component<Props,State> {
   private static _AFTER_SEC_MAX = 5;
   private static _Div_HyBJIr6yMulA = (p:any) => <div className="HyBJIr6yMulA">{p.children}</div>
 
-  private static _Range = (start:number, stop:number, step:number) => {
+  public static _Range = (start:number, stop:number, step:number) => {
     return Array.from({ length: (stop - start) / step + 1}, (_, i) => start + (i * step))
 	}
   private static _At = (coefficients:number[],val:number) => {
@@ -43,10 +43,10 @@ class Ex50 extends React.Component<Props,State> {
       .map((c,i)=>Math.pow(val,coefficients.length-i-1)*c)
       .reduce((a,b)=>a+b,0);
   }
-  private static _Diff = (coefficients:number[]) => {
+  public static _Diff = (coefficients:number[]) => {
     return coefficients
                     .slice(0,coefficients.length-1)
-                    .map((c,i)=>c*(coefficients.length-i-1))
+                    .map((c,i)=>c*(coefficients.length-i-1));
   }
   private _generateRandomParams = () => {
     const res:State = {

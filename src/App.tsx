@@ -2,6 +2,7 @@ import React from 'react';
 import logo from './logo.svg';
 import './App.css';
 import Ex50 from "./Ex50";
+import Ex68 from "./Ex68";
 import MathjaxPolynomial from "./MathjaxPolynomial";
 import 'react-vis/dist/style.css';
 const MathJax:any = require('react-mathjax2');
@@ -27,6 +28,7 @@ type State = {
 class App extends React.Component<{},State> {
   private static _EXERCISES:string[] = [
     "exercise 50",
+    "exercise 68",
   ];
   state:State = {
   };
@@ -47,6 +49,10 @@ class App extends React.Component<{},State> {
       );
     } else if(this.state.exerciseSelected === "exercise 50") {
       return (<Ex50/>);
+    } else if(this.state.exerciseSelected === "exercise 68") {
+      return (<Ex68/>);
+    } else {
+      return (<h1>no such exercise as {this.state.exerciseSelected}</h1>);
     }
   }
 }
