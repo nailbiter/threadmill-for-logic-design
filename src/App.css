@@ -20,17 +20,3 @@
 .App-link {
   color: #09d3ac;
 }
-ol {
-  list-style: none;
-  counter-reset: my-awesome-counter;
-}
-ol li {
-  counter-increment: my-awesome-counter;
-}
-ol li::before {
-  content: "(" counter(my-awesome-counter,lower-alpha) ")";
-}
-.HyBJIr6yMulA {
-  display:flex;
-  justify-content:center;
-}

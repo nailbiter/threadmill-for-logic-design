@@ -1,6 +1,5 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import './Ex50.css';
 import MathjaxPolynomial from "./MathjaxPolynomial";
 import 'react-vis/dist/style.css';
 const MathJax:any = require('react-mathjax2');
@@ -28,7 +27,7 @@ type State = {
   after_sec:number,
 };
 
-class App extends React.Component<Props,State> {
+class Ex50 extends React.Component<Props,State> {
   state:State;
   private static _DEGREE = 3;
   private static _COEFF_MIN = -4;
@@ -55,11 +54,11 @@ class App extends React.Component<Props,State> {
       coefficients: [
         1,
         ...Array.from(
-          {length:App._DEGREE},
-          ()=>Math.floor(App._COEFF_MIN+Math.random()*(App._COEFF_MAX-App._COEFF_MIN))
+          {length:Ex50._DEGREE},
+          ()=>Math.floor(Ex50._COEFF_MIN+Math.random()*(Ex50._COEFF_MAX-Ex50._COEFF_MIN))
         ),
       ],
-      after_sec: 1+Math.floor(Math.random()*(App._AFTER_SEC_MAX-1)),
+      after_sec: 1+Math.floor(Math.random()*(Ex50._AFTER_SEC_MAX-1)),
     };
     console.log("generating new state: %s",JSON.stringify(res,null,2));
     return res;
@@ -109,33 +108,33 @@ class App extends React.Component<Props,State> {
             flexDirection:"column",
           }}>
             <b>(a)</b>
-            <App._Div_HyBJIr6yMulA>
+            <Ex50._Div_HyBJIr6yMulA>
               <MathJax.Context input='ascii'>
                 <MathjaxPolynomial 
-                  coefficients={App._Diff(this.state.coefficients)}
+                  coefficients={Ex50._Diff(this.state.coefficients)}
                   lhs="v="
                 />
               </MathJax.Context>
-            </App._Div_HyBJIr6yMulA>
-            <App._Div_HyBJIr6yMulA>
+            </Ex50._Div_HyBJIr6yMulA>
+            <Ex50._Div_HyBJIr6yMulA>
               <MathJax.Context input='ascii'>
                 <MathjaxPolynomial 
-                  coefficients={App._Diff(App._Diff(this.state.coefficients))} 
+                  coefficients={Ex50._Diff(Ex50._Diff(this.state.coefficients))} 
                   lhs="a="
                 />
               </MathJax.Context>
-            </App._Div_HyBJIr6yMulA>
+            </Ex50._Div_HyBJIr6yMulA>
             <b>(b)</b>
-            <App._Div_HyBJIr6yMulA>
+            <Ex50._Div_HyBJIr6yMulA>
               <MathJax.Context input='ascii'>
-                <MathJax.Node inline>{ `v(${this.state.after_sec})=${App._At(App._Diff(this.state.coefficients),this.state.after_sec)}` }</MathJax.Node>
+                <MathJax.Node inline>{ `v(${this.state.after_sec})=${Ex50._At(Ex50._Diff(this.state.coefficients),this.state.after_sec)}` }</MathJax.Node>
               </MathJax.Context>
-            </App._Div_HyBJIr6yMulA>
-            <App._Div_HyBJIr6yMulA>
+            </Ex50._Div_HyBJIr6yMulA>
+            <Ex50._Div_HyBJIr6yMulA>
               <MathJax.Context input='ascii'>
-                <MathJax.Node inline>{ `a(${this.state.after_sec})=${App._At(App._Diff(App._Diff(this.state.coefficients)),this.state.after_sec)}` }</MathJax.Node>
+                <MathJax.Node inline>{ `a(${this.state.after_sec})=${Ex50._At(Ex50._Diff(Ex50._Diff(this.state.coefficients)),this.state.after_sec)}` }</MathJax.Node>
               </MathJax.Context>
-            </App._Div_HyBJIr6yMulA>
+            </Ex50._Div_HyBJIr6yMulA>
           </div>
           <b>(c)</b>
         <div>
@@ -146,15 +145,15 @@ class App extends React.Component<Props,State> {
             <YAxis />
             {
               [
-                (t:number)=>App._At(this.state.coefficients,t),
-                (t:number)=>App._At(App._Diff(this.state.coefficients),t),
-                (t:number)=>App._At(App._Diff(App._Diff(this.state.coefficients)),t),
+                (t:number)=>Ex50._At(this.state.coefficients,t),
+                (t:number)=>Ex50._At(Ex50._Diff(this.state.coefficients),t),
+                (t:number)=>Ex50._At(Ex50._Diff(Ex50._Diff(this.state.coefficients)),t),
               ]
               .map(f=>{
                 return (
                   <Line
                     className="first-series"
-                    data={App._Range(0,5,0.1).map(x=>({x,y:f(x)}))}
+                    data={Ex50._Range(0,5,0.1).map(x=>({x,y:f(x)}))}
                   />
                 );
               })
@@ -176,4 +175,4 @@ class App extends React.Component<Props,State> {
   }
 }
 
-export default App;
+export default Ex50;
