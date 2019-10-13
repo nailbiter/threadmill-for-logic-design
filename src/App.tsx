@@ -2,6 +2,7 @@ import React from 'react';
 import logo from './logo.svg';
 import './App.css';
 import MathjaxPolynomial from "./MathjaxPolynomial";
+import 'react-vis/dist/style.css';
 const MathJax:any = require('react-mathjax2');
 const Plot:any = require( 'react-function-plot');
 const ReactVis:{
@@ -13,6 +14,7 @@ const ReactVis:{
     VerticalGridLines:any,
     LineSeries:any,
     LineSeriesCanvas:any,
+    DiscreteColorLegend:any,
 } = require("react-vis");
 
 
@@ -34,6 +36,9 @@ class App extends React.Component<Props,State> {
   private static _AFTER_SEC_MAX = 5;
   private static _Div_HyBJIr6yMulA = (p:any) => <div className="HyBJIr6yMulA">{p.children}</div>
 
+  private static _Range = (start:number, stop:number, step:number) => {
+    return Array.from({ length: (stop - start) / step + 1}, (_, i) => start + (i * step))
+	}
   private static _At = (coefficients:number[],val:number) => {
     return coefficients
       .map((c,i)=>Math.pow(val,coefficients.length-i-1)*c)
@@ -66,6 +71,7 @@ class App extends React.Component<Props,State> {
   }
   render() {
     const {
+        DiscreteColorLegend,
         XYPlot,
         XAxis,
         YAxis,
@@ -132,42 +138,30 @@ class App extends React.Component<Props,State> {
             </App._Div_HyBJIr6yMulA>
           </div>
           <b>(c)</b>
-          <Plot
-            className="myPlot"
-            fn={(t:number)=>App._At(App._Diff(this.state.coefficients),t)}
-            thickness={4}
-          />
         <div>
-          <XYPlot width={300} height={300}>
+          <XYPlot width={500} height={500}>
             <HorizontalGridLines />
             <VerticalGridLines />
             <XAxis />
             <YAxis />
-            <Line
-              className="first-series"
-              data={[{x: 1, y: 3}, {x: 2, y: 5}, {x: 3, y: 15}, {x: 4, y: 12}]}
-            />
-          {
-            /*
-            <Line className="second-series" data={null} />
-            <Line
-              className="third-series"
-              curve={'curveMonotoneX'}
-              data={[{x: 1, y: 10}, {x: 2, y: 4}, {x: 3, y: 2}, {x: 4, y: 15}]}
-              strokeDasharray={useCanvas ? [7, 3] : '7, 3'}
-            />
-            <Line
-              className="fourth-series"
-              curve={curveCatmullRom.alpha(0.5)}
-              style={{
-                // note that this can not be translated to the canvas version
-                strokeDasharray: '2 2'
-              }}
-              data={[{x: 1, y: 7}, {x: 2, y: 11}, {x: 3, y: 9}, {x: 4, y: 2}]}
-            />
-             */
-          }
+            {
+              [
+                (t:number)=>App._At(this.state.coefficients,t),
+                (t:number)=>App._At(App._Diff(this.state.coefficients),t),
+                (t:number)=>App._At(App._Diff(App._Diff(this.state.coefficients)),t),
+              ]
+              .map(f=>{
+                return (
+                  <Line
+                    className="first-series"
+                    data={App._Range(0,5,0.1).map(x=>({x,y:f(x)}))}
+                  />
+                );
+              })
+            }
           </XYPlot>
+          <h2>Legend:</h2>
+          <DiscreteColorLegend height={100} width={200} items={["s","v","a"]}/>
         </div>
         </>
       }
