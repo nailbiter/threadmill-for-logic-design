@@ -1,0 +1,21 @@
+{
+  "files": {
+    "main.css": "/threadmill-for-logic-design/static/css/main.dfca195d.chunk.css",
+    "main.js": "/threadmill-for-logic-design/static/js/main.1ad662fe.chunk.js",
+    "main.js.map": "/threadmill-for-logic-design/static/js/main.1ad662fe.chunk.js.map",
+    "runtime-main.js": "/threadmill-for-logic-design/static/js/runtime-main.88fa4455.js",
+    "runtime-main.js.map": "/threadmill-for-logic-design/static/js/runtime-main.88fa4455.js.map",
+    "static/js/2.bc95a565.chunk.js": "/threadmill-for-logic-design/static/js/2.bc95a565.chunk.js",
+    "static/js/2.bc95a565.chunk.js.map": "/threadmill-for-logic-design/static/js/2.bc95a565.chunk.js.map",
+    "index.html": "/threadmill-for-logic-design/index.html",
+    "precache-manifest.18009a194cc232c1d5ad27bbb19ee4d1.js": "/threadmill-for-logic-design/precache-manifest.18009a194cc232c1d5ad27bbb19ee4d1.js",
+    "service-worker.js": "/threadmill-for-logic-design/service-worker.js",
+    "static/css/main.dfca195d.chunk.css.map": "/threadmill-for-logic-design/static/css/main.dfca195d.chunk.css.map"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.88fa4455.js",
+    "static/js/2.bc95a565.chunk.js",
+    "static/css/main.dfca195d.chunk.css",
+    "static/js/main.1ad662fe.chunk.js"
+  ]
+}
