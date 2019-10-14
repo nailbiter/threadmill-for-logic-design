@@ -7,14 +7,14 @@ type MixedFraction = {
 };
 
 export default MixedFraction;
-const _ALPHABET = "0123456789" + "abcdefghijklmnopqrstuvwxyz";
+export const ALPHABET = "0123456789" + "abcdefghijklmnopqrstuvwxyz";
 
 function StringToNumber(s:string,base:number):number {
   let res:number = 0;
   for(let i = 0; i<s.length;i++) {
-    const index = _ALPHABET.indexOf(s.substr(i,1).toLowerCase());
+    const index = ALPHABET.indexOf(s.substr(i,1).toLowerCase());
     if(index<0) {
-      throw JSON.stringify({i,s,_ALPHABET,ss:s.substr(i,1).toLowerCase()},null,2);
+      throw JSON.stringify({i,s,ALPHABET,ss:s.substr(i,1).toLowerCase()},null,2);
     }
     res = res*base + index;
   }
@@ -45,7 +45,7 @@ function NumToString(num:number,base:number):string {
   let res:string = "";
   for(let num_ = num;num_>0;num_=Math.floor(num_/base)) {
     const rem = num_ % base;
-    res += _ALPHABET.substr(rem,1);
+    res += ALPHABET.substr(rem,1);
   }
   return res.split("").reverse().join("");
 }
@@ -57,7 +57,7 @@ export function ToString(frac:MixedFraction,base:number):string {
     let enumerators:number[] = [enumerator];
     while( enumerator!=0 ) {
       enumerator*=base;
-      fracPart += _ALPHABET.substr(Math.floor(enumerator/denominator),1);
+      fracPart += ALPHABET.substr(Math.floor(enumerator/denominator),1);
       enumerator = enumerator % denominator;
       if( enumerators.indexOf(enumerator) > 0 ) {
         enumerators.push(enumerator);
