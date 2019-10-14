@@ -1,23 +1,6 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
-import Ex50 from "./Ex50";
-import Ex68 from "./Ex68";
-import MathjaxPolynomial from "./MathjaxPolynomial";
-import 'react-vis/dist/style.css';
-const MathJax:any = require('react-mathjax2');
-const Plot:any = require( 'react-function-plot');
-const ReactVis:{
-    XYPlot:any,
-    XAxis:any,
-    YAxis:any,
-    ChartLabel:any,
-    HorizontalGridLines:any,
-    VerticalGridLines:any,
-    LineSeries:any,
-    LineSeriesCanvas:any,
-    DiscreteColorLegend:any,
-} = require("react-vis");
+import threadmill from "./threadmill";
 
 
 //global const's
@@ -26,33 +9,57 @@ type State = {
 };
 
 class App extends React.Component<{},State> {
-  private static _EXERCISES:string[] = [
-    "exercise 50",
-    "exercise 68",
-  ];
+  private static _HOMEWORKS:any = {
+    "homework 1":{
+      "exercise 2":"WBgTksGp5ixluAdH9QWx",
+    }
+  };
   state:State = {
   };
   render() {
     if( !this.state.exerciseSelected ) {
       return (
         <div style={{
-          display:"flex"
+          display:"flex",
+          flexDirection:"column",
+          justifyContent:"center",
         }}>
         {
-          App._EXERCISES.map(e=>(
-            <button onClick={()=>this.setState({exerciseSelected:e})}>
-              {e}
-            </button>
-          ))
+          Object.keys(App._HOMEWORKS).map(hwKey=>{
+            return (<section style={{
+              textAlign:"center",
+            }}>
+              <header>{hwKey}</header>
+              <div style={{
+                display:"flex",
+                flexDirection:"row",
+                padding:"0 1em 0 1em",
+              }}>
+                {
+                  Object.keys(App._HOMEWORKS[hwKey]).map(exKey=>{
+                    return (<button onClick={()=>this.setState({exerciseSelected:App._HOMEWORKS[hwKey][exKey]})}>
+                      {exKey}
+                    </button>);
+                  })
+                }
+              </div>
+            </section>);
+          })
         }
         </div>
       );
-    } else if(this.state.exerciseSelected === "exercise 50") {
-      return (<Ex50/>);
-    } else if(this.state.exerciseSelected === "exercise 68") {
-      return (<Ex68/>);
     } else {
-      return (<h1>no such exercise as {this.state.exerciseSelected}</h1>);
+//      return (<h1>no such exercise as {this.state.exerciseSelected}</h1>);
+      const keys:string[] = Object.keys(threadmill as any);
+      for(let i = 0; i < keys.length; i++) {
+        var k:string[] = Object.keys((threadmill as any)[keys[i]]);
+        for(let j = 0; j < k.length;j++) {
+          if((threadmill as any)[keys[i]][k[j]].CODE === this.state.exerciseSelected) {
+            const ComponentToRender = (threadmill as any)[keys[i]][k[j]];
+            return (<ComponentToRender/>);
+          }
+        }
+      }
     }
   }
 }
