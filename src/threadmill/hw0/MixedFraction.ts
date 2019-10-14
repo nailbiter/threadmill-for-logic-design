@@ -75,3 +75,15 @@ export function ToString(frac:MixedFraction,base:number):string {
   }
   return res;
 }
+export function GetIntegerPart(frac:MixedFraction):number {
+  return frac.integerPart;
+}
+export function FromInteger(x:number):MixedFraction {
+  return {
+    integerPart:x,
+    fractionPart:{
+      enumerator:0,
+      denominator:0,
+    }
+  };
+}

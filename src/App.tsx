@@ -12,6 +12,7 @@ class App extends React.Component<{},State> {
   private static _HOMEWORKS:any = {
     "homework 1":{
       "exercise 2":"WBgTksGp5ixluAdH9QWx",
+      "exercise 3":"FYIOtUApQbNfKgfiMMzN",
     }
   };
   state:State = {
